@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class Bilanz {
+package model;
+
+public class Bilanz {
 }

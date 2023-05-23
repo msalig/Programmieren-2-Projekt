@@ -1,8 +1,10 @@
+package model;
+
 public class Auftrag {
 
     private Produkt produkt;
 
-    private Belohnung belohnung;
+    private int belohnung;
 
     public Auftrag() {
 

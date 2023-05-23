@@ -1,3 +1,5 @@
+package model;
+
 public class Orders {
 	private final String[][] data = {
 			{"1","Einlagerung","Papier","Weiss","A4","200"},
