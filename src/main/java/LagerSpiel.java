@@ -11,27 +11,23 @@ public class LagerSpiel extends JFrame {
 
     public static final Dimension PREFERREDSIZE = new Dimension(1440,900);
 
-    private static final long serialVersionUID = 1L;
-
-    private final Logger logger = Logger.getLogger("Lager");
-
-
     public LagerSpiel() {
         super("Lager-Spiel");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(PREFERREDSIZE);
         setPreferredSize(PREFERREDSIZE);
+        setResizable(false);
+        setLayout(null);
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger logger = Logger.getLogger("Lager");
             logger.log(Level.WARNING, ex.toString());
         }
 
-
-        JPanel gameView = new GameView();
-        setContentPane(gameView);
+        setContentPane(new GameView());
 
         //Center the frame
         setLocationRelativeTo(null);

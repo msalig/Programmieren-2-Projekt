@@ -2,77 +2,26 @@ package main.java.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class GameView extends JPanel {
 
+    ImageIcon background;
+
     public GameView() {
-        var icon1 = new ImageIcon("src/main/resources/assets/pngonebyone/enter.png");
-        icon1 = new ImageIcon(icon1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-        var icon2 = new ImageIcon("src/main/resources/assets/pngonebyone/exit.png");
-        icon2 = new ImageIcon(icon2.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-        var icon3 = new ImageIcon("src/main/resources/assets/pngonebyone/down.png");
-        icon3 = new ImageIcon(icon3.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+        setLayout(null);
+        setSize(1400, 900);
 
-        var label1 = new JLabel(icon1, JLabel.CENTER);
-        var label2 = new JLabel(icon2, JLabel.CENTER);
-        var label3 = new JLabel(icon3, JLabel.CENTER);
+        add(new AuftragsEingangView());
+        add(new Regal());
+        add(new BilanzView());
 
-        var listener = new DragMouseAdapter();
-        label1.addMouseListener(listener);
-        label2.addMouseListener(listener);
-        label3.addMouseListener(listener);
-
-        var button = new JButton(icon2);
-        button.setFocusable(false);
-
-        label1.setTransferHandler(new TransferHandler("icon"));
-        label2.setTransferHandler(new TransferHandler("icon"));
-        label3.setTransferHandler(new TransferHandler("icon"));
-        button.setTransferHandler(new TransferHandler("icon"));
-
-        createLayout(label1, label2, label3, button);
+        background = new ImageIcon("src/main/resources/assets/background.jpg");
+        background.setImage(background.getImage().getScaledInstance(1440,900,Image.SCALE_SMOOTH));
     }
 
-    private void createLayout(JComponent... arg) {
-
-        var pane = this;
-        var gl = new GroupLayout(pane);
-        pane.setLayout(gl);
-
-        gl.setAutoCreateContainerGaps(true);
-        gl.setAutoCreateGaps(true);
-
-        gl.setHorizontalGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addGroup(gl.createSequentialGroup()
-                        .addComponent(arg[0])
-                        .addGap(30)
-                        .addComponent(arg[1])
-                        .addGap(30)
-                        .addComponent(arg[2])
-                )
-                .addComponent(arg[3], GroupLayout.DEFAULT_SIZE,
-                        GroupLayout.DEFAULT_SIZE, Integer.MAX_VALUE)
-        );
-
-        gl.setVerticalGroup(gl.createSequentialGroup()
-                .addGroup(gl.createParallelGroup()
-                        .addComponent(arg[0])
-                        .addComponent(arg[1])
-                        .addComponent(arg[2]))
-                .addGap(30)
-                .addComponent(arg[3])
-        );
-    }
-
-    private static class DragMouseAdapter extends MouseAdapter {
-
-        public void mousePressed(MouseEvent e) {
-
-            var c = (JComponent) e.getSource();
-            var handler = c.getTransferHandler();
-            handler.exportAsDrag(c, e, TransferHandler.COPY);
-        }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(background.getImage(), 0, 0, this);
     }
 }
