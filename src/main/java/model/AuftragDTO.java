@@ -15,7 +15,7 @@ public class AuftragDTO {
         return source;
     }
 
-    public Auftrag getProdukt() {
+    public Auftrag getAuftrag() {
         return auftrag;
     }
 }

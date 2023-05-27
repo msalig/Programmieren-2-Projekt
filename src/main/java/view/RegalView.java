@@ -1,13 +1,14 @@
 package main.java.view;
 
+import main.java.controller.Bilanz;
 import main.java.draganddrop.RegalTransferHandler;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Regal extends JPanel {
+public class RegalView extends JPanel {
 
-    public Regal() {
+    public RegalView(Bilanz bilanz) {
         setSize(700,800);
         setLocation(640,30);
         setOpaque(false); //Even if the default maybe false, this line is needed to avoid graphics glitch
@@ -19,10 +20,10 @@ public class Regal extends JPanel {
 
         for(int i = 0; i < 16; i++) {
             JLabel label = new JLabel("", SwingConstants.CENTER);
-
+            label.setName(String.valueOf(i));
             label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-            label.setTransferHandler(new RegalTransferHandler());
+            label.setTransferHandler(new RegalTransferHandler(bilanz));
             add(label);
         }
     }

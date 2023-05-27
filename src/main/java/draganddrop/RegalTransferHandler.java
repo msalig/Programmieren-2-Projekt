@@ -1,17 +1,30 @@
 package main.java.draganddrop;
 
+import main.java.controller.Bilanz;
+import main.java.model.Auftrag;
 import main.java.model.AuftragDTO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
+import java.util.Objects;
 
 public class RegalTransferHandler extends TransferHandler {
 
+    Bilanz bilanz;
+
+    public RegalTransferHandler(Bilanz bilanz) {
+        this.bilanz = bilanz;
+    }
+
     @Override
     public boolean canImport(TransferSupport support) {
-        return (support.getComponent() instanceof JLabel) && support.isDataFlavorSupported(AuftragTransferable.LIST_ITEM_DATA_FLAVOR);
+        if(support.getComponent() instanceof JLabel && support.isDataFlavorSupported(AuftragTransferable.DATA_FLAVOR)) {
+            JLabel lagerplatz = (JLabel) support.getComponent();
+            return lagerplatz.getText().isEmpty();
+        }
+        return false;
     }
 
     @Override
@@ -19,14 +32,21 @@ public class RegalTransferHandler extends TransferHandler {
         boolean accept = false;
         try {
             Transferable t = support.getTransferable();
-            Object value = t.getTransferData(AuftragTransferable.LIST_ITEM_DATA_FLAVOR);
+            Object value = t.getTransferData(AuftragTransferable.DATA_FLAVOR);
             if (value instanceof AuftragDTO) {
                 Component component = support.getComponent();
                 if (component instanceof JLabel) {
-                    ((JLabel)component).setText(((AuftragDTO) value).getProdukt().getType());
-                    ((AuftragDTO) value).getSource().setText("");
-                    ((AuftragDTO) value).getSource().setInformation(null);
-                    accept = true;
+                    if(Objects.equals(component.getName(), "12") && ((AuftragDTO) value).getAuftrag().getType().equals("Stone")) {
+                        JOptionPane.showMessageDialog(null, "Not possible", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Auftrag auftrag = ((AuftragDTO) value).getAuftrag();
+                        ((JLabel) component).setText(auftrag.getType());
+                        bilanz.setBilanz(Integer.parseInt(auftrag.getPrice()));
+
+                        ((AuftragDTO) value).getSource().setText("");
+                        ((AuftragDTO) value).getSource().setInformation(null);
+                        accept = true;
+                    }
                 }
             }
         } catch (Exception exp) {

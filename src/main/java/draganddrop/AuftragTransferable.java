@@ -8,7 +8,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 public class AuftragTransferable implements Transferable {
-    public static final DataFlavor LIST_ITEM_DATA_FLAVOR = new DataFlavor(AuftragDTO.class, "java/Produkt");
+    public static final DataFlavor DATA_FLAVOR = new DataFlavor(AuftragDTO.class, "java/Produkt");
     private AuftragDTO produkt;
 
     public AuftragTransferable(AuftragDTO produkt) {
@@ -17,12 +17,12 @@ public class AuftragTransferable implements Transferable {
 
     @Override
     public DataFlavor[] getTransferDataFlavors() {
-        return new DataFlavor[]{LIST_ITEM_DATA_FLAVOR};
+        return new DataFlavor[]{DATA_FLAVOR};
     }
 
     @Override
     public boolean isDataFlavorSupported(DataFlavor flavor) {
-        return flavor.equals(LIST_ITEM_DATA_FLAVOR);
+        return flavor.equals(DATA_FLAVOR);
     }
 
     @Override

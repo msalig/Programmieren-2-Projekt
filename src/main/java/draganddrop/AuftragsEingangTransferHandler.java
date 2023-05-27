@@ -15,7 +15,8 @@ public class AuftragsEingangTransferHandler extends TransferHandler {
         Transferable t = null;
         if (c instanceof AuftragsEingangView.Label) {
             AuftragsEingangView.Label label = (AuftragsEingangView.Label) c;
-            t = new AuftragTransferable(new AuftragDTO(label, AuftragFactory.createAuftrag(label.getInformation())));
+            if(label.getInformation() != null)
+                t = new AuftragTransferable(new AuftragDTO(label, AuftragFactory.createAuftrag(label.getInformation())));
         }
         return t;
     }

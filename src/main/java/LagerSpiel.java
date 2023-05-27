@@ -19,6 +19,7 @@ public class LagerSpiel extends JFrame {
         setPreferredSize(PREFERREDSIZE);
         setResizable(false);
         setLayout(null);
+        setIconImage(null);
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

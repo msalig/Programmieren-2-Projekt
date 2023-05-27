@@ -1,16 +1,18 @@
 package main.java.view;
 
-import main.java.draganddrop.DragMouseAdapter;
+import main.java.controller.AuftragsEingang;
 import main.java.draganddrop.AuftragsEingangTransferHandler;
-import main.java.model.Orders;
+import main.java.draganddrop.DragMouseAdapter;
+import main.java.draganddrop.VerschrottenTransferHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AuftragsEingangView extends JPanel {
 
-    Orders orders = new Orders();
+    private final AuftragsEingang auftragsEingang = new AuftragsEingang();
 
     public AuftragsEingangView() {
         setSize(400, 500);
@@ -19,42 +21,41 @@ public class AuftragsEingangView extends JPanel {
         setBackground(new Color(255, 255, 255, 40));
         setLayout(new GridLayout(3, 2, 10, 10));
 
-        JButton neuer_auftrag = new JButton("Neuer Auftrag");
-        JButton verschrotten = new JButton("Verschrotten");
+        JButton neuer_auftrag = new JButton(new ImageIcon(new ImageIcon("src/main/resources/assets/pngonebyone/plus.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("trashcan.png"));
+        icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+        JLabel verschrotten = new JLabel(icon, SwingConstants.CENTER);
+        verschrotten.setPreferredSize(new Dimension(400, 400));
+        verschrotten.setTransferHandler(new VerschrottenTransferHandler());
+        verschrotten.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("trashcanopen.png"));
+                icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                verschrotten.setIcon(icon);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("trashcan.png"));
+                icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                verschrotten.setIcon(icon);
+            }
+        });
 
         add(neuer_auftrag);
         add(verschrotten);
 
-        Label[] stellplaetze = {new Label(), new Label(), new Label(), new Label()};
-
         for (int i = 0; i < 4; i++) {
-            stellplaetze[i].setTransferHandler(new AuftragsEingangTransferHandler());
-            stellplaetze[i].addMouseListener(new DragMouseAdapter());
-            stellplaetze[i].setName(String.valueOf(i));
-            add(stellplaetze[i]);
+            auftragsEingang.stellplaetze[i].setTransferHandler(new AuftragsEingangTransferHandler());
+            auftragsEingang.stellplaetze[i].addMouseListener(new DragMouseAdapter());
+            auftragsEingang.stellplaetze[i].setName(String.valueOf(i));
+            add(auftragsEingang.stellplaetze[i]);
         }
 
-        neuer_auftrag.addActionListener(e -> {
-            int freierStellplatz = 0;
-            while(freierStellplatz < 4 && !stellplaetze[freierStellplatz].getText().isEmpty()) {
-                freierStellplatz++;
-            }
-            if (freierStellplatz < 4) {
-                String[] newOrder = orders.getNextOrder();
-
-                stellplaetze[freierStellplatz].setText(Arrays.deepToString(newOrder));
-                stellplaetze[freierStellplatz].setInformation(newOrder);
-            }
-        });
-
-
-        /*ImageIcon icon = new ImageIcon("src/main/resources/assets/pngonebyone/down.png");
-        icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-        JLabel label = new JLabel(icon, SwingConstants.CENTER);
-        label.addMouseListener(new DragMouseAdapter());
-
-        label.setTransferHandler(new TransferHandler("icon"));
-        add(label);*/
+        neuer_auftrag.addActionListener(e -> auftragsEingang.getNeuerAuftrag());
     }
 
     @Override
