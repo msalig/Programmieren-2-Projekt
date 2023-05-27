@@ -39,4 +39,8 @@ public class Auftrag {
     public String getPrice() {
         return price;
     }
+
+    public String getIconPath() {
+        return this.kind + "/" + this.type + "_" + this.size + ".png";
+    }
 }

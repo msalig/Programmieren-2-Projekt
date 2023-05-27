@@ -23,7 +23,7 @@ public class VerschrottenTransferHandler extends TransferHandler {
             if (value instanceof AuftragDTO) {
                 Component component = support.getComponent();
                 if (component instanceof JLabel) {
-                    ((AuftragDTO) value).getSource().setText("");
+                    ((AuftragDTO) value).getSource().setIcon(null);
                     ((AuftragDTO) value).getSource().setInformation(null);
                     accept = true;
                 }

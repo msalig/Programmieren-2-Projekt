@@ -7,12 +7,13 @@ import java.awt.*;
 
 public class BilanzView extends JPanel {
 
-    JLabel bilanzLabel = new JLabel("Bilanz: 0€");
+    JLabel bilanzLabel = new JLabel("<html><font color='white' size='15'>Bilanz: 0€</font></html>");
 
     public BilanzView(Bilanz bilanz) {
         bilanz.setLabel(bilanzLabel);
-        setSize(150,150);
+        setSize(400,150);
         setLocation(13,30);
+        setBackground(Color.GRAY);
 
         addViews();
     }

@@ -14,6 +14,6 @@ public class Bilanz {
 
     public void setBilanz(int newBilanz) {
         this.bilanz += newBilanz;
-        label.setText("Bilanz: " + bilanz + "€");
+        label.setText("<html><font color='white' size='15'>Bilanz: " + this.bilanz + "€</font></html>");
     }
 }

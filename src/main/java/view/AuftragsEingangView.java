@@ -1,5 +1,6 @@
 package main.java.view;
 
+import main.java.Utils;
 import main.java.controller.AuftragsEingang;
 import main.java.draganddrop.AuftragsEingangTransferHandler;
 import main.java.draganddrop.DragMouseAdapter;
@@ -22,7 +23,7 @@ public class AuftragsEingangView extends JPanel {
         setLayout(new GridLayout(3, 2, 10, 10));
 
         JButton neuer_auftrag = new JButton(new ImageIcon(new ImageIcon("src/main/resources/assets/pngonebyone/plus.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("trashcan.png"));
+        ImageIcon icon = Utils.createImageIcon("trashcan.png");
         icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
         JLabel verschrotten = new JLabel(icon, SwingConstants.CENTER);
         verschrotten.setPreferredSize(new Dimension(400, 400));
@@ -31,17 +32,13 @@ public class AuftragsEingangView extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("trashcanopen.png"));
-                icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-                verschrotten.setIcon(icon);
+                verschrotten.setIcon(Utils.createImageIcon("trashcanopen.png", 100, 100));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("trashcan.png"));
-                icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-                verschrotten.setIcon(icon);
+                verschrotten.setIcon(Utils.createImageIcon("trashcan.png", 100, 100));
             }
         });
 

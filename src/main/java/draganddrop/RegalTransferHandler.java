@@ -1,5 +1,6 @@
 package main.java.draganddrop;
 
+import main.java.Utils;
 import main.java.controller.Bilanz;
 import main.java.model.Auftrag;
 import main.java.model.AuftragDTO;
@@ -36,14 +37,15 @@ public class RegalTransferHandler extends TransferHandler {
             if (value instanceof AuftragDTO) {
                 Component component = support.getComponent();
                 if (component instanceof JLabel) {
-                    if(Objects.equals(component.getName(), "12") && ((AuftragDTO) value).getAuftrag().getType().equals("Stone")) {
-                        JOptionPane.showMessageDialog(null, "Not possible", "Error", JOptionPane.ERROR_MESSAGE);
+                    if(!Objects.equals(component.getName(), "12") && !Objects.equals(component.getName(), "13") && !Objects.equals(component.getName(), "14")
+                            && !Objects.equals(component.getName(), "15") && ((AuftragDTO) value).getAuftrag().getKind().equals("Stein")) {
+                        JOptionPane.showMessageDialog(null, "Stein kann nur in der unteren Reihe gelagert werden!", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
                         Auftrag auftrag = ((AuftragDTO) value).getAuftrag();
-                        ((JLabel) component).setText(auftrag.getType());
+                        ((JLabel) component).setIcon(Utils.createImageIcon(auftrag.getIconPath(), 150, 150));
                         bilanz.setBilanz(Integer.parseInt(auftrag.getPrice()));
 
-                        ((AuftragDTO) value).getSource().setText("");
+                        ((AuftragDTO) value).getSource().setIcon(null);
                         ((AuftragDTO) value).getSource().setInformation(null);
                         accept = true;
                     }

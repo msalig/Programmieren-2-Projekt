@@ -1,5 +1,6 @@
 package main.java.view;
 
+import main.java.Utils;
 import main.java.controller.Bilanz;
 
 import javax.swing.*;
@@ -23,8 +24,7 @@ public class GameView extends JPanel {
         add(new RegalView(bilanz));
         add(new BilanzView(bilanz));
 
-        background = new ImageIcon("src/main/resources/assets/background.jpg");
-        background.setImage(background.getImage().getScaledInstance(1440, 900, Image.SCALE_SMOOTH));
+        background = Utils.createImageIcon("background.jpg", 1440, 900);
     }
 
     @Override
