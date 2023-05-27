@@ -1,4 +1,4 @@
-package main.java.view;
+package net.salig.lagerspiel.view;
 
 import javax.swing.*;
 

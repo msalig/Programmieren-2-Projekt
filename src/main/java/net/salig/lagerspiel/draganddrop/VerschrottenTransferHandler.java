@@ -1,6 +1,6 @@
-package main.java.draganddrop;
+package net.salig.lagerspiel.draganddrop;
 
-import main.java.model.AuftragDTO;
+import net.salig.lagerspiel.model.AuftragDTO;
 
 import javax.swing.*;
 import java.awt.*;

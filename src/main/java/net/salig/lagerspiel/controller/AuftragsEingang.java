@@ -1,9 +1,9 @@
-package main.java.controller;
+package net.salig.lagerspiel.controller;
 
-import main.java.Utils;
-import main.java.model.AuftragFactory;
-import main.java.model.Orders;
-import main.java.view.AuftragsEingangView;
+import net.salig.lagerspiel.Utils;
+import net.salig.lagerspiel.model.AuftragFactory;
+import net.salig.lagerspiel.model.Orders;
+import net.salig.lagerspiel.view.AuftragsEingangView;
 
 public class AuftragsEingang {
 

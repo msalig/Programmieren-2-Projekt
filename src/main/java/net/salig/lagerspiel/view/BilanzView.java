@@ -1,6 +1,6 @@
-package main.java.view;
+package net.salig.lagerspiel.view;
 
-import main.java.controller.Bilanz;
+import net.salig.lagerspiel.controller.Bilanz;
 
 import javax.swing.*;
 import java.awt.*;

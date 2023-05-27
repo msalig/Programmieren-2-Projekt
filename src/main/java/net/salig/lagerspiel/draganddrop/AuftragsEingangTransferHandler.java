@@ -1,8 +1,8 @@
-package main.java.draganddrop;
+package net.salig.lagerspiel.draganddrop;
 
-import main.java.model.AuftragDTO;
-import main.java.model.AuftragFactory;
-import main.java.view.AuftragsEingangView;
+import net.salig.lagerspiel.model.AuftragDTO;
+import net.salig.lagerspiel.model.AuftragFactory;
+import net.salig.lagerspiel.view.AuftragsEingangView;
 
 import javax.swing.*;
 import java.awt.datatransfer.Transferable;

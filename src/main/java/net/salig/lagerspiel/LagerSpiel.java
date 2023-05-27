@@ -1,6 +1,6 @@
-package main.java;
+package net.salig.lagerspiel;
 
-import main.java.view.GameView;
+import net.salig.lagerspiel.view.GameView;
 
 import javax.swing.*;
 import java.awt.*;

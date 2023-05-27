@@ -1,9 +1,9 @@
-package main.java.draganddrop;
+package net.salig.lagerspiel.draganddrop;
 
-import main.java.Utils;
-import main.java.controller.Bilanz;
-import main.java.model.Auftrag;
-import main.java.model.AuftragDTO;
+import net.salig.lagerspiel.Utils;
+import net.salig.lagerspiel.controller.Bilanz;
+import net.salig.lagerspiel.model.Auftrag;
+import net.salig.lagerspiel.model.AuftragDTO;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package main.java.draganddrop;
+package net.salig.lagerspiel.draganddrop;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

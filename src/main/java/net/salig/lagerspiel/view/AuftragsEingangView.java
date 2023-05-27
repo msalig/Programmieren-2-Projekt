@@ -1,10 +1,10 @@
-package main.java.view;
+package net.salig.lagerspiel.view;
 
-import main.java.Utils;
-import main.java.controller.AuftragsEingang;
-import main.java.draganddrop.AuftragsEingangTransferHandler;
-import main.java.draganddrop.DragMouseAdapter;
-import main.java.draganddrop.VerschrottenTransferHandler;
+import net.salig.lagerspiel.Utils;
+import net.salig.lagerspiel.controller.AuftragsEingang;
+import net.salig.lagerspiel.draganddrop.AuftragsEingangTransferHandler;
+import net.salig.lagerspiel.draganddrop.DragMouseAdapter;
+import net.salig.lagerspiel.draganddrop.VerschrottenTransferHandler;
 
 import javax.swing.*;
 import java.awt.*;

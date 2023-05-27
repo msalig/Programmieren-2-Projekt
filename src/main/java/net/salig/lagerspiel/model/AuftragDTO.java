@@ -1,6 +1,6 @@
-package main.java.model;
+package net.salig.lagerspiel.model;
 
-import main.java.view.AuftragsEingangView;
+import net.salig.lagerspiel.view.AuftragsEingangView;
 
 public class AuftragDTO {
     private final AuftragsEingangView.Label source;

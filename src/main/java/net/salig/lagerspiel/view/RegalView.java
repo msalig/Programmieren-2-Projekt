@@ -1,7 +1,7 @@
-package main.java.view;
+package net.salig.lagerspiel.view;
 
-import main.java.controller.Bilanz;
-import main.java.draganddrop.RegalTransferHandler;
+import net.salig.lagerspiel.controller.Bilanz;
+import net.salig.lagerspiel.draganddrop.RegalTransferHandler;
 
 import javax.swing.*;
 import java.awt.*;

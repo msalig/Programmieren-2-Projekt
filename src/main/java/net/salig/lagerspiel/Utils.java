@@ -1,4 +1,4 @@
-package main.java;
+package net.salig.lagerspiel;
 
 import javax.swing.*;
 import java.awt.*;

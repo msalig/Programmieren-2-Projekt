@@ -1,4 +1,4 @@
-package main.java.model;
+package net.salig.lagerspiel.model;
 
 public class AuftragFactory {
 

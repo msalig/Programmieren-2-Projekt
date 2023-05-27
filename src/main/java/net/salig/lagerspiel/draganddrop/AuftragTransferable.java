@@ -1,15 +1,13 @@
-package main.java.draganddrop;
+package net.salig.lagerspiel.draganddrop;
 
-import main.java.model.AuftragDTO;
+import net.salig.lagerspiel.model.AuftragDTO;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 
 public class AuftragTransferable implements Transferable {
     public static final DataFlavor DATA_FLAVOR = new DataFlavor(AuftragDTO.class, "java/Produkt");
-    private AuftragDTO produkt;
+    private final AuftragDTO produkt;
 
     public AuftragTransferable(AuftragDTO produkt) {
         this.produkt = produkt;
@@ -26,7 +24,7 @@ public class AuftragTransferable implements Transferable {
     }
 
     @Override
-    public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+    public Object getTransferData(DataFlavor flavor) {
         return produkt;
     }
 }
