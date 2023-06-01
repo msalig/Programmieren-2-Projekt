@@ -1,5 +1,5 @@
 package net.salig.lagerspiel.controller_real;
 
-public interface AuftragseingangController {
+public interface OrderIntakeController {
     void handleNeuerAuftrag();
 }

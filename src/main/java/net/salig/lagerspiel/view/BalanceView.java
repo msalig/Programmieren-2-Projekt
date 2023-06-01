@@ -1,27 +1,27 @@
 package net.salig.lagerspiel.view;
 
 import net.salig.lagerspiel.Utils;
-import net.salig.lagerspiel.controller.Bilanz;
+import net.salig.lagerspiel.controller.Balance;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class KontostandView extends JPanel {
+public class BalanceView extends JPanel {
 
-    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>Balance: 0€</font></html>");
+    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>" + Utils.getStringResources().getString("balance") + ": 0€</font></html>");
 
-    private final Bilanz bilanz;
+    private final Balance balance;
 
     private static final int WIDTH = 400;
     private static final int HEIGHT = 100;
     private static final int X = 13;
     private static final int Y = 30;
 
-    public KontostandView(Bilanz bilanz) {
-        this.bilanz = bilanz;
-        bilanz.setLabel(kontostandLabel);
+    public BalanceView(Balance balance) {
+        this.balance = balance;
+        balance.setLabel(kontostandLabel);
         setOpaque(false);
         setSize(WIDTH, HEIGHT);
         setLocation(X, Y);
@@ -33,7 +33,7 @@ public class KontostandView extends JPanel {
     }
 
     private void addViews() {
-        JLabel bilanzIconLabel = new JLabel(Utils.createImageIcon("bilanz.png"));
+        JLabel bilanzIconLabel = new JLabel(Utils.createImageIcon("assets/bilanz.png"));
         bilanzIconLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,8 +47,8 @@ public class KontostandView extends JPanel {
     }
 
     private void openBilanzWindow() {
-        BilanzWindow bilanzWindow = new BilanzWindow(bilanz);
-        bilanzWindow.setVisible(true);
+        BalanceWindow balanceWindow = new BalanceWindow(balance);
+        balanceWindow.setVisible(true);
     }
 
     @Override

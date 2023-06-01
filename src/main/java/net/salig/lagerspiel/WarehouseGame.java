@@ -5,7 +5,7 @@ import net.salig.lagerspiel.view.GameView;
 import javax.swing.*;
 import java.awt.*;
 
-public class LagerSpiel {
+public class WarehouseGame {
 
     private static final int WIDTH = 1440;
     private static final int HEIGHT = 900;
@@ -15,15 +15,18 @@ public class LagerSpiel {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                  UnsupportedLookAndFeelException ex) {
-            JOptionPane.showMessageDialog(null, "Failed to set the look and feel.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    Utils.getStringResources().getString("error_message_look_and_feel"),
+                    Utils.getStringResources().getString("error_title_look_and_feel"),
+                    JOptionPane.ERROR_MESSAGE);
         }
 
-        LagerSpiel lagerSpiel = new LagerSpiel();
-        lagerSpiel.initUI();
+        WarehouseGame warehouseGame = new WarehouseGame();
+        warehouseGame.initUI();
     }
 
     private void initUI() {
-        JFrame frame = new JFrame("Lager-Spiel");
+        JFrame frame = new JFrame(Utils.getStringResources().getString("main_window_title"));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
         frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));

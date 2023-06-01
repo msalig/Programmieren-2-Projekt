@@ -25,7 +25,7 @@ public class InfoView extends JPanel {
     }
 
     private void addViews() {
-        JLabel infoLabel = new JLabel(Utils.createImageIcon("info.png"));
+        JLabel infoLabel = new JLabel(Utils.createImageIcon("assets/info.png"));
         infoLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

@@ -1,12 +1,12 @@
 package net.salig.lagerspiel.model;
 
-public class Produkt {
+public class Product {
 
     private final String[] order;
 
     private Action action;
 
-    public Produkt(String[] order) {
+    public Product(String[] order) {
         this.order = order;
     }
 

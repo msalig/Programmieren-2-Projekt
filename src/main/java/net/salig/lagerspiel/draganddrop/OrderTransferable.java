@@ -1,15 +1,15 @@
 package net.salig.lagerspiel.draganddrop;
 
-import net.salig.lagerspiel.model.ProduktDTO;
+import net.salig.lagerspiel.model.ProductDTO;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
-public class AuftragTransferable implements Transferable {
-    public static final DataFlavor DATA_FLAVOR = new DataFlavor(ProduktDTO.class, "java/Produkt");
-    private final ProduktDTO produkt;
+public class OrderTransferable implements Transferable {
+    public static final DataFlavor DATA_FLAVOR = new DataFlavor(ProductDTO.class, "java/Produkt");
+    private final ProductDTO produkt;
 
-    public AuftragTransferable(ProduktDTO produkt) {
+    public OrderTransferable(ProductDTO produkt) {
         this.produkt = produkt;
     }
 

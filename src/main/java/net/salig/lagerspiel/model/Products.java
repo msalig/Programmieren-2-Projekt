@@ -1,5 +1,5 @@
 package net.salig.lagerspiel.model;
 
-public enum Produkte {
+public enum Products {
     Papier, Holz, Stein;
 }

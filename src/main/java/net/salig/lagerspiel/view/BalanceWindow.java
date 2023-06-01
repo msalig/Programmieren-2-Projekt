@@ -1,20 +1,22 @@
 package net.salig.lagerspiel.view;
 
-import net.salig.lagerspiel.controller.Bilanz;
-import net.salig.lagerspiel.controller.BilanzTableModel;
+import net.salig.lagerspiel.Utils;
+import net.salig.lagerspiel.controller.Balance;
+import net.salig.lagerspiel.controller.BalanceTableModel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BilanzWindow extends JFrame {
+public class BalanceWindow extends JFrame {
 
-    private final Bilanz bilanz;
+    private final Balance balance;
 
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
 
-    public BilanzWindow(Bilanz bilanz) {
-        this.bilanz = bilanz;
+    public BalanceWindow(Balance balance) {
+        super(Utils.getStringResources().getString("balance_window_title"));
+        this.balance = balance;
         initializeUI();
     }
 
@@ -32,7 +34,7 @@ public class BilanzWindow extends JFrame {
     }
 
     private JTable createBilanzTable() {
-        JTable table = new JTable(new BilanzTableModel(bilanz));
+        JTable table = new JTable(new BalanceTableModel(balance));
         table.setDragEnabled(false);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setRowSelectionAllowed(false);

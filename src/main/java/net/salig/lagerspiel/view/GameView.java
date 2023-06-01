@@ -1,25 +1,25 @@
 package net.salig.lagerspiel.view;
 
 import net.salig.lagerspiel.Utils;
-import net.salig.lagerspiel.controller.Bilanz;
-import net.salig.lagerspiel.controller_real.AuftragseingangController;
-import net.salig.lagerspiel.controller_real.AuftragseingangControllerImpl;
-import net.salig.lagerspiel.model_real.Auftragseingang;
-import net.salig.lagerspiel.view_real.AuftragseingangView;
+import net.salig.lagerspiel.controller.Balance;
+import net.salig.lagerspiel.controller_real.OrderIntakeController;
+import net.salig.lagerspiel.controller_real.OrderIntakeControllerImpl;
+import net.salig.lagerspiel.model_real.OrderIntake;
+import net.salig.lagerspiel.view_real.OrderIntakeView;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends JPanel {
 
-    private final Bilanz bilanz;
+    private final Balance balance;
     private ImageIcon background;
 
     private static final int WIDTH = 1440;
     private static final int HEIGHT = 900;
 
     public GameView() {
-        bilanz = new Bilanz();
+        balance = new Balance();
         setLayout(null);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
@@ -28,7 +28,7 @@ public class GameView extends JPanel {
     }
 
     private void loadBackgroundImage() {
-        background = Utils.createImageIcon("background.jpg");
+        background = Utils.createImageIcon("assets/background.jpg");
     }
 
     private void addViews() {
@@ -38,19 +38,19 @@ public class GameView extends JPanel {
         add(new InfoView());
     }
 
-    private KontostandView createKontostandView() {
-        return new KontostandView(bilanz);
+    private BalanceView createKontostandView() {
+        return new BalanceView(balance);
     }
 
-    private AuftragseingangView createAuftragseingangView() {
-        Auftragseingang model = new Auftragseingang();
-        AuftragseingangView view = new AuftragseingangView(model, bilanz);
-        AuftragseingangController controller = new AuftragseingangControllerImpl(model, view);
+    private OrderIntakeView createAuftragseingangView() {
+        OrderIntake model = new OrderIntake();
+        OrderIntakeView view = new OrderIntakeView(model, balance);
+        OrderIntakeController controller = new OrderIntakeControllerImpl(model, view);
         return view;
     }
 
     private RegalView createRegalView() {
-        return new RegalView(bilanz);
+        return new RegalView(balance);
     }
 
     @Override
