@@ -5,13 +5,14 @@ import net.salig.lagerspiel.model.Action;
 import net.salig.lagerspiel.model.Product;
 
 import javax.swing.*;
-import java.util.ArrayList;
+import javax.swing.table.AbstractTableModel;
 
 public class Balance {
 
     private int accountBalance;
-    private final ArrayList<Product> transactions = new ArrayList<>();
     private JLabel label;
+
+    private final BalanceTableModel tableModel = new BalanceTableModel();
 
     private static final int SCRAP_DEDUCTION = 300;
 
@@ -28,7 +29,7 @@ public class Balance {
         });
 
         product.setAction(action);
-        transactions.add(product);
+        tableModel.add(product);
     }
 
     private void updateKontostandLabel() {
@@ -36,16 +37,12 @@ public class Balance {
                 + ": " + accountBalance + "€</font></html>");
     }
 
-    public ArrayList<Product> getTransactions() {
-        return transactions;
-    }
-
-    public int getAccountBalance() {
-        return accountBalance;
-    }
-
     public void setAccountBalance(int accountBalance) {
         this.accountBalance = accountBalance;
         updateKontostandLabel();
+    }
+
+    public AbstractTableModel getTableModel() {
+        return tableModel;
     }
 }

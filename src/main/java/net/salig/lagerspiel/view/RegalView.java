@@ -64,7 +64,7 @@ public class RegalView extends JPanel {
         //Draw support beams
         for (int i = 0; i <= NUM_ROWS_COLS; i++) {
             int x = i * WIDTH / NUM_ROWS_COLS;
-            g.setColor(Color.WHITE);
+            g.setColor(Color.ORANGE);
             g.fillRect(x - BEAM_WIDTH / 2, HEIGHT / 4 - FLOOR_DEPTH / 2, BEAM_WIDTH, HEIGHT);
             g.setColor(Color.BLACK);
             g.drawLine(x, HEIGHT / 4 - FLOOR_DEPTH / 2, x, HEIGHT);

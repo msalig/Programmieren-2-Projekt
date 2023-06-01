@@ -12,6 +12,8 @@ public class BalanceView extends JPanel {
 
     private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>" + Utils.getStringResources().getString("balance") + ": 0€</font></html>");
 
+    private BalanceWindow balanceWindow;
+
     private final Balance balance;
 
     private static final int WIDTH = 400;
@@ -47,7 +49,9 @@ public class BalanceView extends JPanel {
     }
 
     private void openBilanzWindow() {
-        BalanceWindow balanceWindow = new BalanceWindow(balance);
+        if(balanceWindow == null) {
+            balanceWindow = new BalanceWindow(balance);
+        }
         balanceWindow.setVisible(true);
     }
 

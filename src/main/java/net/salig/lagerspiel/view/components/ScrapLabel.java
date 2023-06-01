@@ -13,7 +13,7 @@ public class ScrapLabel extends JLabel {
 
     public ScrapLabel(Balance balance) {
         super(Utils.createImageIcon("assets/full-trashcan.png"), SwingConstants.CENTER);
-        setToolTipText(Utils.getStringResources().getString("tooltip_scrap_or_reject_order"));
+        setToolTipText(Utils.getStringResources().getString("tooltip.scrap_or_reject_order"));
         setPreferredSize(new Dimension(400, 400));
         setName(getClass().getSimpleName());
         setTransferHandler(new OrderTransferHandler(balance));

@@ -38,10 +38,7 @@ public class InfoView extends JPanel {
     }
 
     private void showInfoDialog() {
-        JFrame infoFrame = new JFrame();
-        infoFrame.setSize(400, 400);
-        infoFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        infoFrame.setLocationRelativeTo(null);
+        JFrame infoFrame = new InfoWindow();
         infoFrame.setVisible(true);
     }
 

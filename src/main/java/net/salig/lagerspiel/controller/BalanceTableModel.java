@@ -5,20 +5,21 @@ import net.salig.lagerspiel.model.Action;
 import net.salig.lagerspiel.model.Product;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class BalanceTableModel extends AbstractTableModel {
 
-    private final Balance balance;
+    private final ArrayList<Product> transactions = new ArrayList<>();
 
-    private static final String[] COLUMN_NAMES = Utils.getStringResources().getStringArray("balance_window_column_names");
-
-    public BalanceTableModel(Balance balance) {
-        this.balance = balance;
-    }
+    private static final String[] COLUMN_NAMES = {
+            Utils.getStringResources().getString("balance.window.column_names.revenue"),
+            Utils.getStringResources().getString("balance.window.column_names.action"),
+            Utils.getStringResources().getString("balance.window.column_names.product")
+    };
 
     @Override
     public int getRowCount() {
-        return balance.getTransactions().size();
+        return transactions.size();
     }
 
     @Override
@@ -28,7 +29,7 @@ public class BalanceTableModel extends AbstractTableModel {
 
     @Override
     public String getValueAt(int rowIndex, int columnIndex) {
-        Product product = balance.getTransactions().get(rowIndex);
+        Product product = transactions.get(rowIndex);
         StringBuilder sb = new StringBuilder();
         if (columnIndex == 0) {
             if (product.getAction() == Action.Verschrotten) {
@@ -44,6 +45,12 @@ public class BalanceTableModel extends AbstractTableModel {
         }
 
         return sb.toString();
+    }
+
+    public void add(Product product) {
+        int row = this.getRowCount();
+        transactions.add(product);
+        fireTableRowsInserted(row, row);
     }
 
     @Override

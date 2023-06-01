@@ -39,6 +39,6 @@ public class Product {
     }
 
     public String getIconPath() {
-        return order[2] + "/" + order[3] + "_" + order[4] + ".png";
+        return "assets/" + order[2] + "/" + order[3] + "_" + order[4] + ".png";
     }
 }

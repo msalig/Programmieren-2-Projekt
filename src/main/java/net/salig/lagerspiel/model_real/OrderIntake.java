@@ -27,8 +27,6 @@ public class OrderIntake {
             }
             stellplaetze[freierStellplatz].setLagerplatzLabelText("<html><font color='white' size='4'>" + newProduct.getAction() + ", " + newOrder[5] + "€</font></html>");
             stellplaetze[freierStellplatz].setProdukt(new Product(newOrder));
-
-            // Notify the controller about the new order
         }
     }
 

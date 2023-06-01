@@ -108,8 +108,8 @@ public class OrderTransferHandler extends TransferHandler {
                 && produktKind.equals(Products.Stein.toString())
                 && produktSize.equals("Schwer")) {
             JOptionPane.showMessageDialog(null,
-                    Utils.getStringResources().getString("error_message_heavy_stone"),
-                    Utils.getStringResources().getString("error_title_heavy_stone"),
+                    Utils.getStringResources().getString("error.message.heavy_stone"),
+                    Utils.getStringResources().getString("error.title.heavy_stone"),
                     JOptionPane.ERROR_MESSAGE);
             return true;
         }
@@ -121,8 +121,8 @@ public class OrderTransferHandler extends TransferHandler {
                 || componentName.equals("Regal_2")
                 || componentName.equals("Regal_3"))) {
             JOptionPane.showMessageDialog(null,
-                    Utils.getStringResources().getString("error_message_medium_weight_stone"),
-                    Utils.getStringResources().getString("error_title_medium_weight_stone"), JOptionPane.ERROR_MESSAGE);
+                    Utils.getStringResources().getString("error.message.medium_weight_stone"),
+                    Utils.getStringResources().getString("error.title.medium_weight_stone"), JOptionPane.ERROR_MESSAGE);
             return true;
         }
 

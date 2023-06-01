@@ -16,8 +16,8 @@ public class WarehouseGame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                  UnsupportedLookAndFeelException ex) {
             JOptionPane.showMessageDialog(null,
-                    Utils.getStringResources().getString("error_message_look_and_feel"),
-                    Utils.getStringResources().getString("error_title_look_and_feel"),
+                    Utils.getStringResources().getString("error.message.look_and_feel"),
+                    Utils.getStringResources().getString("error.title.look_and_feel"),
                     JOptionPane.ERROR_MESSAGE);
         }
 
