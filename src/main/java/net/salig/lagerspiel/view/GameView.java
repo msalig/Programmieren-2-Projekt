@@ -8,28 +8,46 @@ import java.awt.*;
 
 public class GameView extends JPanel {
 
-    ImageIcon background;
-
-    Bilanz bilanz = new Bilanz();
+    private Bilanz bilanz;
+    private ImageIcon background;
 
     public GameView() {
-        setLayout(null);
-        setSize(1440, 900);
+        bilanz = new Bilanz();
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(1440, 900));
 
+        loadBackgroundImage();
         addViews();
     }
 
-    private void addViews() {
-        add(new AuftragsEingangView());
-        add(new RegalView(bilanz));
-        add(new BilanzView(bilanz));
+    private void loadBackgroundImage() {
+        background = Utils.createImageIcon("background.jpg");
+    }
 
-        background = Utils.createImageIcon("background.jpg", 1440, 900);
+    private void addViews() {
+        add(createKontostandView(), BorderLayout.NORTH);
+        add(createAuftragseingangView(), BorderLayout.WEST);
+        add(createRegalView(), BorderLayout.CENTER);
+        add(new InfoView(), BorderLayout.EAST);
+    }
+
+    private KontostandView createKontostandView() {
+        return new KontostandView(bilanz);
+    }
+
+    private AuftragseingangView createAuftragseingangView() {
+        return new AuftragseingangView(bilanz);
+    }
+
+    private RegalView createRegalView() {
+        return new RegalView(bilanz);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(background.getImage(), 0, 0, this);
+        if (background != null) {
+            g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
+        }
     }
 }

@@ -7,6 +7,8 @@ import java.util.Objects;
 
 public final class Utils {
 
+    public final static int IMAGE_SIZE = 150;
+
     public static ImageIcon createImageIcon(String path) {
         URL imgUrl = Utils.class.getClassLoader().getResource(path);
         return new ImageIcon(Objects.requireNonNull(imgUrl));

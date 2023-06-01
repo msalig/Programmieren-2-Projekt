@@ -1,26 +1,37 @@
 package net.salig.lagerspiel.controller;
 
 import net.salig.lagerspiel.Utils;
-import net.salig.lagerspiel.model.AuftragFactory;
+import net.salig.lagerspiel.model.Action;
+import net.salig.lagerspiel.model.Produkt;
 import net.salig.lagerspiel.model.Orders;
-import net.salig.lagerspiel.view.AuftragsEingangView;
+import net.salig.lagerspiel.view.Lagerplatz;
 
 public class AuftragsEingang {
 
     private final Orders orders = new Orders();
 
-    public AuftragsEingangView.Label[] stellplaetze = {new AuftragsEingangView.Label(), new AuftragsEingangView.Label(), new AuftragsEingangView.Label(), new AuftragsEingangView.Label()};
+    public Lagerplatz[] stellplaetze = {new Lagerplatz(), new Lagerplatz(), new Lagerplatz()};
+
+    public int stellplatz = 0;
+    public boolean paintTruck = false;
 
     public void getNeuerAuftrag() {
         int freierStellplatz = 0;
-        while (freierStellplatz < 4 && stellplaetze[freierStellplatz].getIcon() != null) {
+        while (freierStellplatz < stellplaetze.length && stellplaetze[freierStellplatz].getIcon() != null) {
             freierStellplatz++;
         }
-        if (freierStellplatz < 4) {
+        if (freierStellplatz < stellplaetze.length) {
             String[] newOrder = orders.getNextOrder();
+            Produkt newProdukt = new Produkt(newOrder);
+            if(newProdukt.getAction() == Action.Auslagerung) {
+                paintTruck = true;
+                stellplatz = freierStellplatz;
+            }
 
-            stellplaetze[freierStellplatz].setIcon(Utils.createImageIcon(AuftragFactory.createAuftrag(newOrder).getIconPath(), 150, 150));
-            stellplaetze[freierStellplatz].setInformation(newOrder);
+
+            stellplaetze[freierStellplatz].setIcon(Utils.createImageIcon(newProdukt.getIconPath(), Utils.IMAGE_SIZE, Utils.IMAGE_SIZE));
+            stellplaetze[freierStellplatz].setLagerplatzLabelText("<html><font color='white' size='4'>" + newProdukt.getAction() + ", " + newOrder[5] + "€</font></html>");
+            stellplaetze[freierStellplatz].setProdukt(new Produkt(newOrder));
         }
     }
 }
