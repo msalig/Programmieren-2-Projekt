@@ -11,7 +11,7 @@ public final class Utils {
 
     public final static int IMAGE_SIZE = 190;
 
-    private static final ResourceBundle stringResources = ResourceBundle.getBundle("strings", Locale.getDefault());
+    private static final ResourceBundle stringResources = ResourceBundle.getBundle("values.strings", Locale.getDefault());
 
     public static ImageIcon createImageIcon(String path) {
         URL imgUrl = Utils.class.getClassLoader().getResource(path);
