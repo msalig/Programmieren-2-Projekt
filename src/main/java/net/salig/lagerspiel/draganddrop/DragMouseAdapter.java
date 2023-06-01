@@ -8,8 +8,7 @@ public class DragMouseAdapter extends MouseAdapter {
 
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
-        var c = (JComponent) e.getSource();
-        JLabel label = (JLabel) c;
+        JLabel label = (JLabel) e.getSource();
         var handler = label.getTransferHandler();
         handler.exportAsDrag(label, e, TransferHandler.COPY);
     }

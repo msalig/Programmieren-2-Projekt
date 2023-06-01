@@ -4,36 +4,36 @@ import net.salig.lagerspiel.view.GameView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class LagerSpiel extends JFrame {
+public class LagerSpiel {
 
-    public static final Dimension PREFERREDSIZE = new Dimension(1440,900);
+    private static final int WIDTH = 1440;
+    private static final int HEIGHT = 900;
 
-    public LagerSpiel() {
-        super("Lager-Spiel");
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(PREFERREDSIZE);
-        setPreferredSize(PREFERREDSIZE);
-        setResizable(false);
-        setLayout(null);
-        setIconImage(null);
-
+    public static void startApplication() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger logger = Logger.getLogger("Lager");
-            logger.log(Level.WARNING, ex.toString());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException ex) {
+            JOptionPane.showMessageDialog(null, "Failed to set the look and feel.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        setContentPane(new GameView());
+        LagerSpiel lagerSpiel = new LagerSpiel();
+        lagerSpiel.initUI();
+    }
 
-        //Center the frame
-        setLocationRelativeTo(null);
-        //Display the window.
-        pack();
-        setVisible(true);
+    private void initUI() {
+        JFrame frame = new JFrame("Lager-Spiel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        frame.setResizable(false);
+        frame.setIconImage(null);
+
+        frame.setContentPane(new GameView());
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

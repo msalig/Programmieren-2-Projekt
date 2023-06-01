@@ -1,6 +1,6 @@
 package net.salig.lagerspiel.model;
 
-import net.salig.lagerspiel.view.Lagerplatz;
+import net.salig.lagerspiel.view.components.Lagerplatz;
 
 public class ProduktDTO {
     private final Lagerplatz source;

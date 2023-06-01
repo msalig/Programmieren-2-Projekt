@@ -10,35 +10,45 @@ import java.awt.event.MouseEvent;
 
 public class KontostandView extends JPanel {
 
-    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>Kontostand: 0€</font></html>");
+    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>Balance: 0€</font></html>");
 
     private final Bilanz bilanz;
+
+    private static final int WIDTH = 400;
+    private static final int HEIGHT = 100;
+    private static final int X = 13;
+    private static final int Y = 30;
 
     public KontostandView(Bilanz bilanz) {
         this.bilanz = bilanz;
         bilanz.setLabel(kontostandLabel);
         setOpaque(false);
-        setSize(400,100);
-        setLocation(13,30);
+        setSize(WIDTH, HEIGHT);
+        setLocation(X, Y);
         setBackground(new Color(0, 0, 0, 125));
 
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new FlowLayout(FlowLayout.LEFT));
 
         addViews();
     }
 
     private void addViews() {
-        JLabel open_bilanz_window = new JLabel(Utils.createImageIcon("bilanz.png"));
-        open_bilanz_window.addMouseListener(new MouseAdapter() {
+        JLabel bilanzIconLabel = new JLabel(Utils.createImageIcon("bilanz.png"));
+        bilanzIconLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                new BilanzWindow(bilanz);
+                openBilanzWindow();
             }
         });
-        add(open_bilanz_window);
+        add(bilanzIconLabel);
 
         add(kontostandLabel);
+    }
+
+    private void openBilanzWindow() {
+        BilanzWindow bilanzWindow = new BilanzWindow(bilanz);
+        bilanzWindow.setVisible(true);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package net.salig.lagerspiel.view;
 
 import net.salig.lagerspiel.Utils;
-import net.salig.lagerspiel.controller.AuftragsEingang;
+import net.salig.lagerspiel.controller.Auftragseingang;
 import net.salig.lagerspiel.controller.Bilanz;
 import net.salig.lagerspiel.draganddrop.AuftragTransferHandler;
 import net.salig.lagerspiel.draganddrop.DragMouseAdapter;
@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 
 public class AuftragseingangView extends JPanel {
 
-    private final AuftragsEingang auftragsEingang = new AuftragsEingang();
+    private final Auftragseingang auftragsEingang = new Auftragseingang();
 
     public AuftragseingangView(Bilanz bilanz) {
         setSize(400, 600);

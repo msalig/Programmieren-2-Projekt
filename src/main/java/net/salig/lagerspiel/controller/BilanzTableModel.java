@@ -9,7 +9,7 @@ public class BilanzTableModel extends AbstractTableModel {
 
     private final Bilanz bilanz;
 
-    private final String[] columnNames = {"Umsätze", "Aktion", "Produkt"};
+    private static final String[] COLUMN_NAMES = {"Umsätze", "Aktion", "Produkt"};
 
     public BilanzTableModel(Bilanz bilanz) {
         this.bilanz = bilanz;
@@ -17,29 +17,29 @@ public class BilanzTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return bilanz.getTransaktionen().size();
+        return bilanz.getTransactions().size();
     }
 
     @Override
     public int getColumnCount() {
-        return columnNames.length;
+        return COLUMN_NAMES.length;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Produkt produkt = bilanz.getTransaktionen().get(rowIndex);
+    public String getValueAt(int rowIndex, int columnIndex) {
+        Produkt produkt = bilanz.getTransactions().get(rowIndex);
         StringBuilder sb = new StringBuilder();
-        switch (columnIndex) {
-            case 0 -> {
-                if (produkt.getAction() == Action.Verschrotten) {
-                    sb.append("-");
-                } else {
-                    sb.append("+");
-                }
-                sb.append(produkt.getPrice()).append("€");
+        if (columnIndex == 0) {
+            if (produkt.getAction() == Action.Verschrotten) {
+                sb.append("-");
+            } else {
+                sb.append("+");
             }
-            case 1 -> sb.append(produkt.getAction());
-            case 2 -> sb.append(produkt.getKind()).append(", ").append(produkt.getType()).append(", ").append(produkt.getSize());
+            sb.append(produkt.getPrice()).append("€");
+        } else if (columnIndex == 1) {
+            sb.append(produkt.getAction());
+        } else if (columnIndex == 2) {
+            sb.append(produkt.getKind()).append(", ").append(produkt.getType()).append(", ").append(produkt.getSize());
         }
 
         return sb.toString();
@@ -47,6 +47,6 @@ public class BilanzTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return columnNames[column];
+        return COLUMN_NAMES[column];
     }
 }

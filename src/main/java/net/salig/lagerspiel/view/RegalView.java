@@ -1,18 +1,23 @@
 package net.salig.lagerspiel.view;
 
-import net.salig.lagerspiel.Utils;
 import net.salig.lagerspiel.controller.Bilanz;
 import net.salig.lagerspiel.draganddrop.AuftragTransferHandler;
 import net.salig.lagerspiel.draganddrop.DragMouseAdapter;
+import net.salig.lagerspiel.view.components.Lagerplatz;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class RegalView extends JPanel {
 
+    private static final int WIDTH = 700;
+    private static final int HEIGHT = 800;
+    private static final int X = 550;
+    private static final int Y = 30;
+
     public RegalView(Bilanz bilanz) {
-        setSize(700,800);
-        setLocation(550,30);
+        setSize(WIDTH,HEIGHT);
+        setLocation(X,Y);
         setOpaque(false); //Even if the default maybe false, this line is needed to avoid graphics glitch
         setBackground(new Color(0, 0, 0, 125));
 

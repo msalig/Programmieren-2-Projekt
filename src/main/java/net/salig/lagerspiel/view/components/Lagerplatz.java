@@ -1,4 +1,4 @@
-package net.salig.lagerspiel.view;
+package net.salig.lagerspiel.view.components;
 
 import net.salig.lagerspiel.model.Produkt;
 

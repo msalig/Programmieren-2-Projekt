@@ -4,38 +4,39 @@ import net.salig.lagerspiel.controller.Bilanz;
 import net.salig.lagerspiel.controller.BilanzTableModel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class BilanzWindow extends JFrame {
 
-    private Bilanz bilanz;
+    private final Bilanz bilanz;
+
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 500;
 
     public BilanzWindow(Bilanz bilanz) {
         this.bilanz = bilanz;
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(500, 500);
-        setLayout(null);
-        setLocationRelativeTo(null);
-
-        setVisible(true);
-
-        addViews();
+        initializeUI();
     }
 
-    private void addViews() {
-        JPanel panel = new JPanel();
-        JTable table = new JTable();
-        JScrollPane scrollPane = new JScrollPane(table);
+    private void initializeUI() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
+        JTable table = createBilanzTable();
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER);
+
+        setVisible(true);
+    }
+
+    private JTable createBilanzTable() {
+        JTable table = new JTable(new BilanzTableModel(bilanz));
         table.setDragEnabled(false);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        table.setColumnSelectionAllowed(false);
-        table.setCellSelectionEnabled(false);
         table.setRowSelectionAllowed(false);
-        table.setModel(new BilanzTableModel(bilanz));
-        table.setSize(this.getWidth(), 400);
 
-        panel.add(scrollPane);
-        panel.setBounds(0, 0, this.getWidth(), 400);
-        this.add(panel);
+        return table;
     }
 }

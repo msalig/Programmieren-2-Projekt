@@ -4,9 +4,9 @@ import net.salig.lagerspiel.Utils;
 import net.salig.lagerspiel.model.Action;
 import net.salig.lagerspiel.model.Produkt;
 import net.salig.lagerspiel.model.Orders;
-import net.salig.lagerspiel.view.Lagerplatz;
+import net.salig.lagerspiel.view.components.Lagerplatz;
 
-public class AuftragsEingang {
+public class Auftragseingang {
 
     private final Orders orders = new Orders();
 

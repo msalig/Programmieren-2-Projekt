@@ -9,28 +9,46 @@ import java.awt.event.MouseEvent;
 
 public class InfoView extends JPanel {
 
+    private static final int PANEL_WIDTH = 96;
+    private static final int PANEL_HEIGHT = 96;
+    private static final int X = 1314;
+    private static final int Y = 30;
+
     public InfoView() {
-        setLocation(1314, 30);
-        setSize(96, 96);
-        setBackground(Color.DARK_GRAY);
+        setLocation(new Point(X, Y));
+        setSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        setOpaque(false);
+        setBackground(new Color(0, 0, 0, 125));
+        setLayout(new BorderLayout());
 
         addViews();
     }
 
     private void addViews() {
-        JLabel info = new JLabel(Utils.createImageIcon("info.png"));
-        info.addMouseListener(new MouseAdapter() {
+        JLabel infoLabel = new JLabel(Utils.createImageIcon("info.png"));
+        infoLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                JFrame info = new JFrame();
-                info.setSize(400, 400);
-                info.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                info.setLocationRelativeTo(null);
-                info.setVisible(true);
+                showInfoDialog();
             }
         });
 
-        add(info);
+        add(infoLabel, BorderLayout.CENTER);
+    }
+
+    private void showInfoDialog() {
+        JFrame infoFrame = new JFrame();
+        infoFrame.setSize(400, 400);
+        infoFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        infoFrame.setLocationRelativeTo(null);
+        infoFrame.setVisible(true);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(getBackground());
+        g.fillRect(0, 0, getWidth(), getHeight());
     }
 }

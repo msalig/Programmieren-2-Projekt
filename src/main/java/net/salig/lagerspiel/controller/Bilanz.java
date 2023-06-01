@@ -8,33 +8,42 @@ import java.util.ArrayList;
 
 public class Bilanz {
 
-    private int kontostand;
+    private int accountBalance;
+    private final ArrayList<Produkt> transactions = new ArrayList<>();
+    private JLabel label;
 
-    private final ArrayList<Produkt> transaktionen = new ArrayList<>();
-
-    private JLabel label = new JLabel();
+    private static final int VERSCHROTTEN_DEDUCTION = 300;
 
     public void setLabel(JLabel label) {
         this.label = label;
     }
 
     public void auftragAbschließen(Produkt produkt, Action action) {
-        switch (action) {
-            case Einlagerung, Auslagerung -> this.kontostand += produkt.getPrice();
-            case Ablehnen -> this.kontostand -= produkt.getPrice();
-            case Verschrotten -> this.kontostand -= 300;
-        }
+        setAccountBalance(switch (action) {
+            case Einlagerung, Auslagerung -> accountBalance + produkt.getPrice();
+            case Ablehnen -> accountBalance - produkt.getPrice();
+            case Verschrotten -> accountBalance - VERSCHROTTEN_DEDUCTION;
+            case ERROR -> -1;
+        });
 
         produkt.setAction(action);
-        transaktionen.add(produkt);
-        updateKontostandLabel();
+        transactions.add(produkt);
     }
 
     private void updateKontostandLabel() {
-        label.setText("<html><font color='white' size='15'>Kontostand: " + this.kontostand + "€</font></html>");
+        label.setText("<html><font color='white' size='3'>Balance: " + accountBalance + "€</font></html>");
     }
 
-    public ArrayList<Produkt> getTransaktionen() {
-        return transaktionen;
+    public ArrayList<Produkt> getTransactions() {
+        return transactions;
+    }
+
+    public int getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(int accountBalance) {
+        this.accountBalance = accountBalance;
+        updateKontostandLabel();
     }
 }

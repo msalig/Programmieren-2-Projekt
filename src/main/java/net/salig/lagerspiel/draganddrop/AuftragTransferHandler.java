@@ -4,7 +4,7 @@ import net.salig.lagerspiel.Utils;
 import net.salig.lagerspiel.controller.Bilanz;
 import net.salig.lagerspiel.model.Action;
 import net.salig.lagerspiel.model.ProduktDTO;
-import net.salig.lagerspiel.view.Lagerplatz;
+import net.salig.lagerspiel.view.components.Lagerplatz;
 import net.salig.lagerspiel.view.components.VerschrottenLabel;
 
 import javax.swing.*;
@@ -64,14 +64,18 @@ public class AuftragTransferHandler extends TransferHandler {
     }
 
     private void handleImportData(ProduktDTO produktDTO, Component component) {
-        if (!(component instanceof VerschrottenLabel) && !isInvalidStorage(produktDTO, component)) {
-            handleLagerplatzImport(produktDTO, component);
+        if (!(component instanceof VerschrottenLabel)) {
+            if(!isInvalidStorage(produktDTO, component)) {
+                handleLagerplatzImport(produktDTO, component);
+                resetSource(produktDTO);
+            }
         } else if (produktDTO.getSource().getName().contains("Auftragseingang")) {
             bilanz.auftragAbschließen(produktDTO.getAuftrag(), Action.Ablehnen);
-        } else {
+            resetSource(produktDTO);
+        } else if (produktDTO.getSource().getName().contains("Regal")){
             bilanz.auftragAbschließen(produktDTO.getAuftrag(), Action.Verschrotten);
+            resetSource(produktDTO);
         }
-        resetSource(produktDTO);
     }
 
     private void handleLagerplatzImport(ProduktDTO produktDTO, Component component) {

@@ -2,19 +2,26 @@ package net.salig.lagerspiel.view;
 
 import net.salig.lagerspiel.Utils;
 import net.salig.lagerspiel.controller.Bilanz;
+import net.salig.lagerspiel.controller_real.AuftragseingangController;
+import net.salig.lagerspiel.controller_real.AuftragseingangControllerImpl;
+import net.salig.lagerspiel.model_real.Auftragseingang;
+import net.salig.lagerspiel.view_real.AuftragseingangView;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends JPanel {
 
-    private Bilanz bilanz;
+    private final Bilanz bilanz;
     private ImageIcon background;
+
+    private static final int WIDTH = 1440;
+    private static final int HEIGHT = 900;
 
     public GameView() {
         bilanz = new Bilanz();
-        setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(1440, 900));
+        setLayout(null);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         loadBackgroundImage();
         addViews();
@@ -25,10 +32,10 @@ public class GameView extends JPanel {
     }
 
     private void addViews() {
-        add(createKontostandView(), BorderLayout.NORTH);
-        add(createAuftragseingangView(), BorderLayout.WEST);
-        add(createRegalView(), BorderLayout.CENTER);
-        add(new InfoView(), BorderLayout.EAST);
+        add(createKontostandView());
+        add(createAuftragseingangView());
+        add(createRegalView());
+        add(new InfoView());
     }
 
     private KontostandView createKontostandView() {
@@ -36,7 +43,10 @@ public class GameView extends JPanel {
     }
 
     private AuftragseingangView createAuftragseingangView() {
-        return new AuftragseingangView(bilanz);
+        Auftragseingang model = new Auftragseingang();
+        AuftragseingangView view = new AuftragseingangView(model, bilanz);
+        AuftragseingangController controller = new AuftragseingangControllerImpl(model, view);
+        return view;
     }
 
     private RegalView createRegalView() {

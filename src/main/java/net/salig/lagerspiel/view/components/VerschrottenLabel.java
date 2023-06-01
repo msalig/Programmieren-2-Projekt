@@ -15,22 +15,20 @@ public class VerschrottenLabel extends JLabel {
         super(Utils.createImageIcon("full-trashcan.png"), SwingConstants.CENTER);
         setToolTipText("Auftrag ablehnen / verschrotten");
         setPreferredSize(new Dimension(400, 400));
-        setName(this.getClass().getSimpleName());
+        setName(getClass().getSimpleName());
         setTransferHandler(new AuftragTransferHandler(bilanz));
         addMouseListener(new VerschrottenLabelMouseAdapter());
     }
 
-    private class VerschrottenLabelMouseAdapter extends MouseAdapter {
+    private static class VerschrottenLabelMouseAdapter extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
             super.mouseEntered(e);
-            setIcon(Utils.createImageIcon("empty-trashcan.png", 100, 100));
-        }
+            ((VerschrottenLabel) e.getSource()).setIcon(Utils.createImageIcon("empty-trashcan.png"));        }
 
         @Override
         public void mouseExited(MouseEvent e) {
             super.mouseExited(e);
-            setIcon(Utils.createImageIcon("full-trashcan.png", 100, 100));
-        }
+            ((VerschrottenLabel) e.getSource()).setIcon(Utils.createImageIcon("full-trashcan.png"));        }
     }
 }
