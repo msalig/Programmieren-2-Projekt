@@ -1,4 +1,4 @@
-package net.salig.lagerspiel.view;
+package net.salig.lagerspiel.view.regal;
 
 import net.salig.lagerspiel.controller.Balance;
 import net.salig.lagerspiel.draganddrop.OrderTransferHandler;

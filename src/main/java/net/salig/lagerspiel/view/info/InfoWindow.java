@@ -1,4 +1,4 @@
-package net.salig.lagerspiel.view;
+package net.salig.lagerspiel.view.info;
 
 import net.salig.lagerspiel.Utils;
 

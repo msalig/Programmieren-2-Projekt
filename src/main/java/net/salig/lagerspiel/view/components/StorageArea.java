@@ -34,7 +34,7 @@ public class StorageArea extends JLabel {
         lagerplatzLabel.setIcon(icon);
     }
 
-    public void emptyStellplatz() {
+    public void empty() {
         setIcon(null);
         setProdukt(null);
         lagerplatzLabel.setText(null);

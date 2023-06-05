@@ -1,9 +1,10 @@
-package net.salig.lagerspiel.view;
+package net.salig.lagerspiel.view.balance;
 
 import net.salig.lagerspiel.Utils;
 import net.salig.lagerspiel.controller.Balance;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class BalanceWindow extends JFrame {
@@ -28,6 +29,11 @@ public class BalanceWindow extends JFrame {
         JTable table = createBilanzTable();
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
+
+        JLabel label = new JLabel("   Gesamt: " + balance.getAccountBalance() + "€");
+        label.setBorder(new LineBorder(Color.BLACK));
+        label.setPreferredSize(new Dimension(300, 50));
+        add(label, BorderLayout.PAGE_END);
 
         setVisible(true);
     }

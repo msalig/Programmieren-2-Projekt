@@ -5,6 +5,9 @@ import net.salig.lagerspiel.controller.Balance;
 import net.salig.lagerspiel.controller_real.OrderIntakeController;
 import net.salig.lagerspiel.controller_real.OrderIntakeControllerImpl;
 import net.salig.lagerspiel.model_real.OrderIntake;
+import net.salig.lagerspiel.view.balance.BalanceView;
+import net.salig.lagerspiel.view.info.InfoView;
+import net.salig.lagerspiel.view.regal.RegalView;
 import net.salig.lagerspiel.view_real.OrderIntakeView;
 
 import javax.swing.*;

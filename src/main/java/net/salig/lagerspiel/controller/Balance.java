@@ -33,13 +33,17 @@ public class Balance {
     }
 
     private void updateKontostandLabel() {
-        label.setText("<html><font color='white' size='3'>" + Utils.getStringResources().getString("balance")
-                + ": " + accountBalance + "€</font></html>");
+        label.setText("<html><font color='white' size='15'>" + Utils.getStringResources().getString("balance")
+                + ": <br>" + accountBalance + "€</font></html>");
     }
 
     public void setAccountBalance(int accountBalance) {
         this.accountBalance = accountBalance;
         updateKontostandLabel();
+    }
+
+    public int getAccountBalance() {
+        return accountBalance;
     }
 
     public AbstractTableModel getTableModel() {

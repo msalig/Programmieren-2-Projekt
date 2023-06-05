@@ -32,8 +32,8 @@ public class BalanceTableModel extends AbstractTableModel {
         Product product = transactions.get(rowIndex);
         StringBuilder sb = new StringBuilder();
         if (columnIndex == 0) {
-            if (product.getAction() == Action.Verschrotten) {
-                sb.append("-");
+            if (product.getAction() == Action.Verschrotten || product.getAction() == Action.Ablehnen) {
+                sb.append(" -");
             } else {
                 sb.append("+");
             }

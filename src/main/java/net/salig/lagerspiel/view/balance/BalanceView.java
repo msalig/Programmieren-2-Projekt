@@ -1,4 +1,4 @@
-package net.salig.lagerspiel.view;
+package net.salig.lagerspiel.view.balance;
 
 import net.salig.lagerspiel.Utils;
 import net.salig.lagerspiel.controller.Balance;
@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 public class BalanceView extends JPanel {
 
-    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>" + Utils.getStringResources().getString("balance") + ": 0€</font></html>");
+    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>" + Utils.getStringResources().getString("balance") + ": <br>0€</font></html>");
 
     private BalanceWindow balanceWindow;
 
@@ -49,10 +49,14 @@ public class BalanceView extends JPanel {
     }
 
     private void openBilanzWindow() {
-        if(balanceWindow == null) {
+        if (balanceWindow == null) {
             balanceWindow = new BalanceWindow(balance);
+            balanceWindow.setVisible(true);
+        } else if (balanceWindow.isVisible()) {
+            balanceWindow.setLocationRelativeTo(null);
+        } else {
+            balanceWindow.setVisible(true);
         }
-        balanceWindow.setVisible(true);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
 public class OrderTransferable implements Transferable {
-    public static final DataFlavor DATA_FLAVOR = new DataFlavor(ProductDTO.class, "java/Produkt");
+    public static final DataFlavor DATA_FLAVOR = new DataFlavor(ProductDTO.class, "java/Product");
     private final ProductDTO produkt;
 
     public OrderTransferable(ProductDTO produkt) {

@@ -5,6 +5,7 @@ import net.salig.lagerspiel.controller.Balance;
 import net.salig.lagerspiel.model.Action;
 import net.salig.lagerspiel.model.ProductDTO;
 import net.salig.lagerspiel.model.Products;
+import net.salig.lagerspiel.view.components.ErrorDialog;
 import net.salig.lagerspiel.view.components.StorageArea;
 import net.salig.lagerspiel.view.components.ScrapLabel;
 
@@ -70,10 +71,10 @@ public class OrderTransferHandler extends TransferHandler {
         if (!(component instanceof ScrapLabel)) {
             if (component.getName().contains("Auftragseingang") && productDTO.getSource().getName().contains("Regal")) {
                 resetSource(productDTO);
-                ((StorageArea) component).emptyStellplatz();
                 balance.auftragAbschließen(((StorageArea) component).getProdukt(), Action.Auslagerung);
-            } else if (!isInvalidStorage(productDTO, component)) {
-                handleLagerplatzImport(productDTO, component);
+                ((StorageArea) component).empty();
+            } else if (isValidStorage(productDTO, component)) {
+                handleOrderImport(productDTO, component);
                 resetSource(productDTO);
             }
         } else if (productDTO.getSource().getName().contains("Auftragseingang")) {
@@ -85,51 +86,36 @@ public class OrderTransferHandler extends TransferHandler {
         }
     }
 
-    private void handleLagerplatzImport(ProductDTO productDTO, Component component) {
+    private void handleOrderImport(ProductDTO productDTO, Component component) {
         StorageArea storageArea = (StorageArea) component;
         storageArea.setProdukt(productDTO.getSource().getProdukt());
         JLabel label = (JLabel) component;
         label.setIcon(Utils.createImageIcon(productDTO.getAuftrag().getIconPath(), Utils.IMAGE_SIZE, Utils.IMAGE_SIZE));
+
         if (!productDTO.getSource().getName().contains("Regal")) {
             balance.auftragAbschließen(productDTO.getAuftrag(), productDTO.getAuftrag().getAction());
         }
     }
 
-    private boolean isInvalidStorage(ProductDTO productDTO, Component component) {
+    private boolean isValidStorage(ProductDTO productDTO, Component component) {
         String componentName = component.getName();
         String produktKind = productDTO.getAuftrag().getKind();
         String produktSize = productDTO.getAuftrag().getSize();
 
-        if (!componentName.equals(ScrapLabel.class.getSimpleName())
-                && !componentName.equals("Regal_12")
-                && !componentName.equals("Regal_13")
-                && !componentName.equals("Regal_14")
-                && !componentName.equals("Regal_15")
-                && produktKind.equals(Products.Stein.toString())
-                && produktSize.equals("Schwer")) {
-            JOptionPane.showMessageDialog(null,
-                    Utils.getStringResources().getString("error.message.heavy_stone"),
-                    Utils.getStringResources().getString("error.title.heavy_stone"),
-                    JOptionPane.ERROR_MESSAGE);
-            return true;
+        if (component instanceof StorageArea && produktKind.equals(Products.Stein.class.getSimpleName())) {
+            if(produktSize.equals(Products.Stein.Size.Schwer.toString()) && componentName.matches("^(?!Regal_1[2-5]$).*")) {
+                ErrorDialog.showErrorDialog("heavy_stone");
+                return false;
+            } else if(produktSize.equals(Products.Stein.Size.Mittel.toString()) && componentName.matches("^Regal_[0-3]$")) {
+                ErrorDialog.showErrorDialog("medium_weight_stone");
+                return false;
+            }
         }
 
-        if (produktKind.equals(Products.Stein.toString())
-                && produktSize.equals("Mittel")
-                && (componentName.equals("Regal_0")
-                || componentName.equals("Regal_1")
-                || componentName.equals("Regal_2")
-                || componentName.equals("Regal_3"))) {
-            JOptionPane.showMessageDialog(null,
-                    Utils.getStringResources().getString("error.message.medium_weight_stone"),
-                    Utils.getStringResources().getString("error.title.medium_weight_stone"), JOptionPane.ERROR_MESSAGE);
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     private void resetSource(ProductDTO productDTO) {
-        productDTO.getSource().emptyStellplatz();
+        productDTO.getSource().empty();
     }
 }
