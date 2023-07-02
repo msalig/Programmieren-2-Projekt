@@ -1,42 +1,48 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel;
 
-import net.salig.lagerspiel.view.GameView;
+import net.salig.lagerspiel.view.MainView;
+import net.salig.lagerspiel.view.components.ErrorDialog;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class WarehouseGame {
+public class WarehouseGame extends JFrame {
 
     private static final int WIDTH = 1440;
     private static final int HEIGHT = 900;
 
-    public static void startApplication() {
+    public WarehouseGame() {
+        super(Utils.getString("main.window.title"));
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                  UnsupportedLookAndFeelException ex) {
-            JOptionPane.showMessageDialog(null,
-                    Utils.getStringResources().getString("error.message.look_and_feel"),
-                    Utils.getStringResources().getString("error.title.look_and_feel"),
-                    JOptionPane.ERROR_MESSAGE);
+            ErrorDialog.showErrorDialog("look_and_feel");
         }
 
-        WarehouseGame warehouseGame = new WarehouseGame();
-        warehouseGame.initUI();
+        initUI();
     }
 
     private void initUI() {
-        JFrame frame = new JFrame(Utils.getStringResources().getString("main_window_title"));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        frame.setResizable(false);
-        frame.setIconImage(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setResizable(false);
+        setIconImage(null);
 
-        frame.setContentPane(new GameView());
+        setContentPane(new MainView());
 
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }

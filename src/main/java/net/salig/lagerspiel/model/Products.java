@@ -1,23 +1,15 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.model;
 
 public enum Products {
     None;
-
-    public enum Holz {
-        Kiefer, Buche, Eiche;
-
-        public enum Size {
-            Bretter, Balken, Scheit;
-        }
-    }
-
-    public enum Papier {
-        Blau, Weis, Gruen;
-
-        public enum Size {
-            A5, A4, A3;
-        }
-    };
 
     public enum Stein {
         Sandstein, Marmor, Granit;

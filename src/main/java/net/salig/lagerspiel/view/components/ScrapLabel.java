@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.view.components;
 
 import net.salig.lagerspiel.Utils;
@@ -13,7 +21,7 @@ public class ScrapLabel extends JLabel {
 
     public ScrapLabel(Balance balance) {
         super(Utils.createImageIcon("assets/full-trashcan.png"), SwingConstants.CENTER);
-        setToolTipText(Utils.getStringResources().getString("tooltip.scrap_or_reject_order"));
+        setToolTipText(Utils.getString("tooltip.scrap_or_reject_order"));
         setPreferredSize(new Dimension(400, 400));
         setName(getClass().getSimpleName());
         setTransferHandler(new OrderTransferHandler(balance));

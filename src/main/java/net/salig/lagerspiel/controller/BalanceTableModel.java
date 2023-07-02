@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.controller;
 
 import net.salig.lagerspiel.Utils;
@@ -12,9 +20,9 @@ public class BalanceTableModel extends AbstractTableModel {
     private final ArrayList<Product> transactions = new ArrayList<>();
 
     private static final String[] COLUMN_NAMES = {
-            Utils.getStringResources().getString("balance.window.column_names.revenue"),
-            Utils.getStringResources().getString("balance.window.column_names.action"),
-            Utils.getStringResources().getString("balance.window.column_names.product")
+            Utils.getString("balance.window.column_names.revenue"),
+            Utils.getString("balance.window.column_names.action"),
+            Utils.getString("balance.window.column_names.product")
     };
 
     @Override
@@ -32,14 +40,14 @@ public class BalanceTableModel extends AbstractTableModel {
         Product product = transactions.get(rowIndex);
         StringBuilder sb = new StringBuilder();
         if (columnIndex == 0) {
-            if (product.getAction() == Action.Verschrotten || product.getAction() == Action.Ablehnen) {
+            if (product.getAction() == Action.SCRAP || product.getAction() == Action.REJECT) {
                 sb.append(" -");
             } else {
-                sb.append("+");
+                sb.append(" +");
             }
             sb.append(product.getPrice()).append("€");
         } else if (columnIndex == 1) {
-            sb.append(product.getAction());
+            sb.append(Utils.getString(product.getAction().toString().toLowerCase()));
         } else if (columnIndex == 2) {
             sb.append(product.getKind()).append(", ").append(product.getType()).append(", ").append(product.getSize());
         }

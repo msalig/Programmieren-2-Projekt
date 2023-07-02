@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.view.balance;
 
 import net.salig.lagerspiel.Utils;
@@ -15,7 +23,7 @@ public class BalanceWindow extends JFrame {
     private static final int HEIGHT = 500;
 
     public BalanceWindow(Balance balance) {
-        super(Utils.getStringResources().getString("balance.window.title"));
+        super(Utils.getString("balance.window.title"));
         this.balance = balance;
         initializeUI();
     }
@@ -30,11 +38,12 @@ public class BalanceWindow extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
-        JLabel label = new JLabel("   Gesamt: " + balance.getAccountBalance() + "€");
+        JLabel label = new JLabel("   " + Utils.getString("balance.window.overall") + ": " + balance.getAccountBalance() + "€");
         label.setBorder(new LineBorder(Color.BLACK));
         label.setPreferredSize(new Dimension(300, 50));
         add(label, BorderLayout.PAGE_END);
 
+        pack();
         setVisible(true);
     }
 

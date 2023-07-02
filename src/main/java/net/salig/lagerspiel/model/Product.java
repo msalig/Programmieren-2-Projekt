@@ -1,13 +1,28 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.model;
 
 public class Product {
 
-    private final String[] order;
-
     private Action action;
 
+    private final String kind;
+    private final String type;
+    private final String size;
+    private final int price;
+
     public Product(String[] order) {
-        this.order = order;
+        this.action = Action.parseString(order[1]);
+        this.kind = order[2];
+        this.type = order[3];
+        this.size = order[4];
+        this.price = Integer.parseInt(order[5]);
     }
 
     public void setAction(Action action) {
@@ -15,30 +30,26 @@ public class Product {
     }
 
     public Action getAction() {
-        if (this.action == null) {
-            return Action.parseString(order[1]);
-        } else {
-            return this.action;
-        }
+        return action;
     }
 
     public String getKind() {
-        return order[2];
+        return kind;
     }
 
     public String getType() {
-        return order[3];
+        return type;
     }
 
     public String getSize() {
-        return order[4];
+        return size;
     }
 
     public int getPrice() {
-        return Integer.parseInt(order[5]);
+        return price;
     }
 
     public String getIconPath() {
-        return "assets/" + order[2] + "/" + order[3] + "_" + order[4] + ".png";
+        return "assets/" + kind + "/" + type + "_" + size + ".png";
     }
 }

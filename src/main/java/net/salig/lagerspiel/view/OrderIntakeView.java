@@ -1,11 +1,19 @@
-package net.salig.lagerspiel.view_real;
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
+package net.salig.lagerspiel.view;
 
 import net.salig.lagerspiel.Utils;
 import net.salig.lagerspiel.controller.Balance;
-import net.salig.lagerspiel.controller_real.OrderIntakeController;
+import net.salig.lagerspiel.controller.OrderIntakeController;
 import net.salig.lagerspiel.draganddrop.OrderTransferHandler;
 import net.salig.lagerspiel.draganddrop.DragMouseAdapter;
-import net.salig.lagerspiel.model_real.OrderIntake;
+import net.salig.lagerspiel.model.OrderIntake;
 import net.salig.lagerspiel.view.components.StorageArea;
 import net.salig.lagerspiel.view.components.ScrapLabel;
 
@@ -31,7 +39,8 @@ public class OrderIntakeView extends JPanel {
         this.balance = balance;
         this.model = model;
 
-        initializeUI();
+        initializeView();
+        addViews();
         setupEventListeners();
     }
 
@@ -39,14 +48,17 @@ public class OrderIntakeView extends JPanel {
         this.controller = controller;
     }
 
-    private void initializeUI() {
+    private void initializeView() {
         setSize(new Dimension(WIDTH, HEIGHT));
         setLocation(new Point(X, Y));
         setOpaque(false);
         setBackground(new Color(0, 0, 0, 125));
         setLayout(new GridLayout(4, 2));
+    }
 
+    private void addViews() {
         neuer_auftrag = new JLabel(Utils.createImageIcon("assets/plus.png"));
+        neuer_auftrag.setToolTipText(Utils.getString("tooltip.new_order"));
         add(neuer_auftrag);
         add(new ScrapLabel(balance));
 
@@ -68,7 +80,7 @@ public class OrderIntakeView extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (controller != null) {
-                    controller.handleNeuerAuftrag();
+                    controller.handleNewOrder();
                 }
             }
         });

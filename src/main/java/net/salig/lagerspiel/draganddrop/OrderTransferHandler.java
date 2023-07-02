@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.draganddrop;
 
 import net.salig.lagerspiel.Utils;
@@ -16,7 +24,7 @@ import java.awt.dnd.DnDConstants;
 
 public class OrderTransferHandler extends TransferHandler {
 
-    private Balance balance;
+    private final Balance balance;
 
     public OrderTransferHandler(Balance balance) {
         this.balance = balance;
@@ -55,7 +63,7 @@ public class OrderTransferHandler extends TransferHandler {
     protected Transferable createTransferable(JComponent c) {
         if (c instanceof StorageArea) {
             StorageArea storageArea = (StorageArea) c;
-            if (storageArea.getProdukt() != null && storageArea.getProdukt().getAction() != Action.Auslagerung) {
+            if (storageArea.getProdukt() != null) {
                 return new OrderTransferable(new ProductDTO(storageArea, storageArea.getProdukt()));
             }
         }
@@ -68,21 +76,23 @@ public class OrderTransferHandler extends TransferHandler {
     }
 
     private void handleImportData(ProductDTO productDTO, Component component) {
-        if (!(component instanceof ScrapLabel)) {
+        if (component instanceof ScrapLabel) {
+            if (productDTO.getSource().getName().contains("Auftragseingang")) {
+                balance.completeOrder(productDTO.getOrder(), Action.REJECT);
+                resetSource(productDTO);
+            } else if (productDTO.getSource().getName().contains("Regal")) {
+                balance.completeOrder(productDTO.getOrder(), Action.SCRAP);
+                resetSource(productDTO);
+            }
+        } else {
             if (component.getName().contains("Auftragseingang") && productDTO.getSource().getName().contains("Regal")) {
                 resetSource(productDTO);
-                balance.auftragAbschließen(((StorageArea) component).getProdukt(), Action.Auslagerung);
+                balance.completeOrder(((StorageArea) component).getProdukt(), Action.RETRIEVE);
                 ((StorageArea) component).empty();
-            } else if (isValidStorage(productDTO, component)) {
+            } else if (isValidStorage(productDTO, component) && productDTO.getOrder().getAction() != Action.RETRIEVE) {
                 handleOrderImport(productDTO, component);
                 resetSource(productDTO);
             }
-        } else if (productDTO.getSource().getName().contains("Auftragseingang")) {
-            balance.auftragAbschließen(productDTO.getAuftrag(), Action.Ablehnen);
-            resetSource(productDTO);
-        } else if (productDTO.getSource().getName().contains("Regal")) {
-            balance.auftragAbschließen(productDTO.getAuftrag(), Action.Verschrotten);
-            resetSource(productDTO);
         }
     }
 
@@ -90,17 +100,17 @@ public class OrderTransferHandler extends TransferHandler {
         StorageArea storageArea = (StorageArea) component;
         storageArea.setProdukt(productDTO.getSource().getProdukt());
         JLabel label = (JLabel) component;
-        label.setIcon(Utils.createImageIcon(productDTO.getAuftrag().getIconPath(), Utils.IMAGE_SIZE, Utils.IMAGE_SIZE));
+        label.setIcon(Utils.createImageIcon(productDTO.getOrder().getIconPath(), Utils.IMAGE_SIZE, Utils.IMAGE_SIZE));
 
         if (!productDTO.getSource().getName().contains("Regal")) {
-            balance.auftragAbschließen(productDTO.getAuftrag(), productDTO.getAuftrag().getAction());
+            balance.completeOrder(productDTO.getOrder(), productDTO.getOrder().getAction());
         }
     }
 
     private boolean isValidStorage(ProductDTO productDTO, Component component) {
         String componentName = component.getName();
-        String produktKind = productDTO.getAuftrag().getKind();
-        String produktSize = productDTO.getAuftrag().getSize();
+        String produktKind = productDTO.getOrder().getKind();
+        String produktSize = productDTO.getOrder().getSize();
 
         if (component instanceof StorageArea && produktKind.equals(Products.Stein.class.getSimpleName())) {
             if(produktSize.equals(Products.Stein.Size.Schwer.toString()) && componentName.matches("^(?!Regal_1[2-5]$).*")) {

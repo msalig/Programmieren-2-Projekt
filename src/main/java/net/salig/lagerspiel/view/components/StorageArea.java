@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.view.components;
 
 import net.salig.lagerspiel.model.Product;
@@ -8,14 +16,14 @@ public class StorageArea extends JLabel {
     private Product product;
 
     public JLabel getLabel() {
-        return lagerplatzLabel;
+        return storageAreaLabel;
     }
 
-    private final JLabel lagerplatzLabel = new JLabel();
+    private final JLabel storageAreaLabel = new JLabel();
 
     public StorageArea() {
         this.setHorizontalAlignment(SwingUtilities.CENTER);
-        lagerplatzLabel.setHorizontalAlignment(JLabel.CENTER);
+        storageAreaLabel.setHorizontalAlignment(JLabel.CENTER);
     }
 
     public Product getProdukt() {
@@ -26,18 +34,18 @@ public class StorageArea extends JLabel {
         this.product = product;
     }
 
-    public void setLagerplatzLabelText(String text) {
-        lagerplatzLabel.setText(text);
+    public void setStorageAreaLabelText(String text) {
+        storageAreaLabel.setText(text);
     }
 
-    public void setLagerplatzLabelIcon(ImageIcon icon) {
-        lagerplatzLabel.setIcon(icon);
+    public void setStorageAreaLabelIcon(ImageIcon icon) {
+        storageAreaLabel.setIcon(icon);
     }
 
     public void empty() {
         setIcon(null);
         setProdukt(null);
-        lagerplatzLabel.setText(null);
-        lagerplatzLabel.setIcon(null);
+        storageAreaLabel.setText(null);
+        storageAreaLabel.setIcon(null);
     }
 }

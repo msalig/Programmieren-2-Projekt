@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.view.balance;
 
 import net.salig.lagerspiel.Utils;
@@ -10,7 +18,8 @@ import java.awt.event.MouseEvent;
 
 public class BalanceView extends JPanel {
 
-    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>" + Utils.getStringResources().getString("balance") + ": <br>0€</font></html>");
+    private final JLabel kontostandLabel = new JLabel("<html><font color='white' size='15'>" +
+            Utils.getString("balance") + ": <br>0€</font></html>");
 
     private BalanceWindow balanceWindow;
 
@@ -36,6 +45,7 @@ public class BalanceView extends JPanel {
 
     private void addViews() {
         JLabel bilanzIconLabel = new JLabel(Utils.createImageIcon("assets/bilanz.png"));
+        bilanzIconLabel.setToolTipText(Utils.getString("tooltip.balance"));
         bilanzIconLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -51,12 +61,10 @@ public class BalanceView extends JPanel {
     private void openBilanzWindow() {
         if (balanceWindow == null) {
             balanceWindow = new BalanceWindow(balance);
-            balanceWindow.setVisible(true);
-        } else if (balanceWindow.isVisible()) {
-            balanceWindow.setLocationRelativeTo(null);
-        } else {
-            balanceWindow.setVisible(true);
         }
+        balanceWindow.setState(JFrame.NORMAL);
+        balanceWindow.setLocationRelativeTo(null);
+        balanceWindow.setVisible(true);
     }
 
     @Override

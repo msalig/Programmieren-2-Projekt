@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2023 Marko Salig.
+ *
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
 package net.salig.lagerspiel.view.info;
 
 import net.salig.lagerspiel.Utils;
@@ -14,6 +22,8 @@ public class InfoView extends JPanel {
     private static final int X = 1314;
     private static final int Y = 30;
 
+    private JFrame infoWindow;
+
     public InfoView() {
         setLocation(new Point(X, Y));
         setSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -22,24 +32,31 @@ public class InfoView extends JPanel {
         setLayout(new BorderLayout());
 
         addViews();
+        showTutorial();
     }
 
     private void addViews() {
         JLabel infoLabel = new JLabel(Utils.createImageIcon("assets/info.png"));
+        infoLabel.setToolTipText(Utils.getString("tooltip.info"));
         infoLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                showInfoDialog();
+                showTutorial();
             }
         });
 
         add(infoLabel, BorderLayout.CENTER);
     }
 
-    private void showInfoDialog() {
-        JFrame infoFrame = new InfoWindow();
-        infoFrame.setVisible(true);
+    private void showTutorial() {
+        if (infoWindow == null) {
+            infoWindow = new TutorialWindow();
+            infoWindow.setAlwaysOnTop(true);
+        }
+        infoWindow.setState(JFrame.NORMAL);
+        infoWindow.setLocationRelativeTo(null);
+        infoWindow.setVisible(true);
     }
 
     @Override
