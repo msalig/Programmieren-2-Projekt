@@ -1,4 +1,4 @@
-package net.salig.lagerspiel.controller_real;
+package net.salig.lagerspiel.controller;
 
 public interface OrderIntakeController {
     void handleNeuerAuftrag();
