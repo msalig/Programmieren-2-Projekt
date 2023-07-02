@@ -58,8 +58,6 @@ public class TutorialWindow extends JFrame {
         updateNavPanel();
 
         add(mainPanel);
-
-        pack();
     }
 
     private JPanel createHeadingPanel() {
